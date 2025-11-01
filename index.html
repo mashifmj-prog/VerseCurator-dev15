@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerseCurator - Social Community</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cbc;
+            --accent-color: #ff6b6b;
+            --background-color: #f5f7fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --text-light: #777777;
+            --border-radius: 8px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-theme {
+            --primary-color: #5a7bb5;
+            --secondary-color: #7b9ccc;
+            --accent-color: #ff7b7b;
+            --background-color: #1a1a2e;
+            --card-color: #16213e;
+            --text-color: #e6e6e6;
+            --text-light: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* VIEW SECTIONS - ADDED FOR NAVIGATION */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+        }
+
+        .verse-text {
+            font-style: italic;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(74, 111, 165, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+        }
+
+        .action-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        .action-btn.active {
+            color: var(--accent-color);
+        }
+
+        .right-sidebar {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .challenge-card {
+            background-color: rgba(74, 111, 165, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .audio-player {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .player-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 5px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 30%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.success {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .notification.error {
+            border-left: 4px solid #f44336;
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* NEW STYLES FOR PHASE 3.2 AI FEATURES */
+        .ai-recommendation-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .analytics-card {
+            background: var(--card-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .analytics-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+        }
+
+        .intelligence-panel {
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">VerseCurator</div>
+            <nav class="nav-links">
+                <a href="#" class="active" data-view="home">Home</a>
+                <a href="#" data-view="discover">Discover</a>
+                <a href="#" data-view="community">Community</a>
+                <a href="#" data-view="intelligence">Intelligence</a>
+                <a href="#" data-view="profile">Profile</a>
+            </nav>
+            <div class="user-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
+            </div>
+        </header>
+
+        <!-- HOME VIEW -->
+        <section id="home-view" class="view-section active">
+            <div class="main-content">
+                <aside class="sidebar">
+                    <h3 class="section-title">My Profile</h3>
+                    <div class="user-info-card">
+                        <div class="user-avatar">JD</div>
+                        <div class="username">John Doe</div>
+                        <div class="user-stats">
+                            <div>Followers: <span id="followerCount">24</span></div>
+                            <div>Following: <span id="followingCount">18</span></div>
+                            <div>Verses: <span id="verseCount">12</span></div>
+                        </div>
+                        <button class="btn btn-primary" id="createPostBtn" style="width: 100%; margin-top: 15px;">Create Post</button>
+                    </div>
+
+                    <h3 class="section-title" style="margin-top: 20px;">Trending Topics</h3>
+                    <div class="topics-list">
+                        <div class="topic-tag">#Inspiration</div>
+                        <div class="topic-tag">#Faith</div>
+                        <div class="topic-tag">#Hope</div>
+                        <div class="topic-tag">#Love</div>
+                        <div class="topic-tag">#Peace</div>
+                    </div>
+                </aside>
+
+                <main class="feed">
+                    <!-- AI Recommendation Card -->
+                    <div class="ai-recommendation-card">
+                        <div class="ai-badge">AI Suggestion</div>
+                        <h3>Based on your reading habits</h3>
+                        <p>We recommend exploring verses about <strong>hope and perseverance</strong> today</p>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-color); margin-top: 10px;">
+                            Show Recommendations
+                        </button>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="user-avatar">JD</div>
+                            <div class="user-info">
+                                <div class="username">John Doe</div>
+                                <div class="post-time">2 hours ago</div>
+                            </div>
+                            <button class="btn btn-outline follow-btn" data-user="1">Following</button>
+                        </div>
+                        <div class="post-content">
+                            <div class="verse-text">
+                                "For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future." - Jeremiah 29:11
+                            </div>
+                            <p>This verse has been on my heart today. No matter what we're going through, God has a plan for our lives.</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn" data-post="1">
+                                <span>❤️</span> <span class="like-count">12</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-post="1">
+                                <span>💬</span> <span class="comment-count">5</span>
+                            </button>
+                            <button class="action-btn share-btn" data-post="1">
+                                <span>🔄</span> <span>Share</span>
+                            </button>
+                            <button class="action-btn copy-btn" data-verse="Jeremiah 29:11">
+                                <span>📋</span> <span>Copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="user-avatar">SJ</div>
+                            <div class="user-info">
+                                <div class="username">Sarah Johnson</div>
+                                <div class="post-time">5 hours ago</div>
+                            </div>
+                            <button class="btn btn-outline follow-btn" data-user="2">Follow</button>
+                        </div>
+                        <div class="post-content">
+                            <div class="verse-text">
+                                "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go." - Joshua 1:9
+                            </div>
+                            <p>Feeling anxious about an upcoming decision. This verse reminded me that I'm not alone in this.</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn" data-post="2">
+                                <span>❤️</span> <span class="like-count">8</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-post="2">
+                                <span>💬</span> <span class="comment-count">3</span>
+                            </button>
+                            <button class="action-btn share-btn" data-post="2">
+                                <span>🔄</span> <span>Share</span>
+                            </button>
+                            <button class="action-btn copy-btn" data-verse="Joshua 1:9">
+                                <span>📋</span> <span>Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                </main>
+
+                <aside class="right-sidebar">
+                    <h3 class="section-title">Community Challenges</h3>
+                    <div class="challenge-card">
+                        <h4>30-Day Bible Reading</h4>
+                        <p>Join our community in reading through the New Testament in 30 days.</p>
+                        <button class="btn btn-primary join-challenge-btn" style="width: 100%; margin-top: 10px;">Join Challenge</button>
+                    </div>
+                    <div class="challenge-card">
+                        <h4>Verse Memorization</h4>
+                        <p>Memorize one key verse each week with accountability partners.</p>
+                        <button class="btn btn-primary join-challenge-btn" style="width: 100%; margin-top: 10px;">Join Challenge</button>
+                    </div>
+
+                    <h3 class="section-title" style="margin-top: 20px;">Suggested Friends</h3>
+                    <div class="suggested-users">
+                        <div class="suggested-user">
+                            <div class="user-avatar">MJ</div>
+                            <div class="user-info">
+                                <div class="username">Michael Jordan</div>
+                                <div class="mutual-friends">4 mutual friends</div>
+                            </div>
+                            <button class="btn btn-outline follow-btn" data-user="3">Follow</button>
+                        </div>
+                        <div class="suggested-user">
+                            <div class="user-avatar">ES</div>
+                            <div class="user-info">
+                                <div class="username">Emma Smith</div>
+                                <div class="mutual-friends">2 mutual friends</div>
+                            </div>
+                            <button class="btn btn-outline follow-btn" data-user="4">Follow</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="audio-player">
+                <div class="player-controls">
+                    <button class="player-btn" id="prevBtn">⏮️</button>
+                    <button class="player-btn" id="playBtn">▶️</button>
+                    <button class="player-btn" id="nextBtn">⏭️</button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="current-track">Psalm 23 - The Lord is My Shepherd</div>
+            </div>
+        </section>
+
+        <!-- DISCOVER VIEW -->
+        <section id="discover-view" class="view-section">
+            <div class="verse-section">
+                <h2>Discover New Content</h2>
+                <p>Find new verses, users, and communities based on your interests</p>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-value">12</div>
+                        <div class="analytics-label">New Posts Today</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">8</div>
+                        <div class="analytics-label">Active Communities</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">24</div>
+                        <div class="analytics-label">Suggested Friends</div>
+                    </div>
+                </div>
+
+                <div class="ai-recommendation-card">
+                    <div class="ai-badge">AI Curated</div>
+                    <h3>Trending in Your Network</h3>
+                    <p>Your friends are engaging with verses about <strong>faith and trust</strong></p>
+                    <button class="btn btn-outline" style="background: white; color: var(--primary-color); margin-top: 10px;">
+                        Explore Trending
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMMUNITY VIEW -->
+        <section id="community-view" class="view-section">
+            <div class="verse-section">
+                <h2>Community Engagement</h2>
+                <p>Connect with other believers and grow together</p>
+                
+                <div class="intelligence-panel">
+                    <h3>Community Insights</h3>
+                    <p>Your community is most active between <strong>7-9 PM</strong></p>
+                    <p>Top engagement topics: <strong>Prayer, Hope, Guidance</strong></p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Join Community Discussion</button>
+                    <button class="btn btn-outline">Create Study Group</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTELLIGENCE VIEW (PHASE 3.2) -->
+        <section id="intelligence-view" class="view-section">
+            <div class="verse-section">
+                <h2>AI Intelligence & Analytics</h2>
+                <p>Advanced insights and personalized recommendations</p>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-value">78%</div>
+                        <div class="analytics-label">Reading Consistency</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">15</div>
+                        <div class="analytics-label">Verses This Week</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">92%</div>
+                        <div class="analytics-label">Engagement Rate</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">7</div>
+                        <div class="analytics-label">Active Streak</div>
+                    </div>
+                </div>
+
+                <div class="intelligence-panel">
+                    <h3>🤖 Smart Recommendations</h3>
+                    <div class="ai-recommendation-card">
+                        <div class="ai-badge">AI Powered</div>
+                        <h4>Personalized Reading Plan</h4>
+                        <p>Based on your activity, we suggest focusing on <strong>Psalms</strong> this week</p>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-color); margin-top: 10px;">
+                            Start Plan
+                        </button>
+                    </div>
+
+                    <div class="ai-recommendation-card" style="margin-top: 15px;">
+                        <div class="ai-badge">Smart Match</div>
+                        <h4>Community Connections</h4>
+                        <p>We found 3 users with similar reading interests</p>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-color); margin-top: 10px;">
+                            Connect Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="generateInsights">Generate Detailed Insights</button>
+                    <button class="btn btn-outline" id="exportData">Export Analytics</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE VIEW -->
+        <section id="profile-view" class="view-section">
+            <div class="verse-section">
+                <h2>Your Profile</h2>
+                <p>Manage your account and preferences</p>
+                
+                <div class="user-info-card" style="text-align: center; margin: 20px 0;">
+                    <div class="user-avatar" style="width: 80px; height: 80px; margin: 0 auto 15px;">JD</div>
+                    <div class="username" style="font-size: 1.5rem;">John Doe</div>
+                    <div class="user-stats">
+                        <div>Member since: January 2024</div>
+                        <div>Last active: Today</div>
+                    </div>
+                </div>
+
+                <div class="intelligence-panel">
+                    <h3>📊 Your Spiritual Journey</h3>
+                    <p><strong>Total verses engaged:</strong> 156</p>
+                    <p><strong>Favorite book:</strong> Psalms</p>
+                    <p><strong>Most active time:</strong> Morning (7-9 AM)</p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Edit Profile</button>
+                    <button class="btn btn-outline">Privacy Settings</button>
+                    <button class="btn btn-outline">Notification Preferences</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals (same as before) -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to VerseCurator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create an Account</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create a New Post</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label for="postVerse">Bible Verse</label>
+                    <input type="text" id="postVerse" class="form-control" placeholder="e.g., John 3:16" required>
+                </div>
+                <div class="form-group">
+                    <label for="postText">Verse Text</label>
+                    <textarea id="postText" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postReflection">Your Reflection</label>
+                    <textarea id="postReflection" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Publish Post</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share This Verse</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="share-options">
+                <button class="btn btn-outline share-option" data-platform="facebook">Facebook</button>
+                <button class="btn btn-outline share-option" data-platform="twitter">Twitter</button>
+                <button class="btn btn-outline share-option" data-platform="whatsapp">WhatsApp</button>
+                <button class="btn btn-outline share-option" data-platform="copy">Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <script>
+        // Enhanced Application State for Phase 3.2
+        const appState = {
+            currentUser: null,
+            isLoggedIn: false,
+            currentTheme: 'light',
+            currentView: 'home',
+            posts: [
+                {
+                    id: 1,
+                    userId: 1,
+                    username: 'John Doe',
+                    verse: 'Jeremiah 29:11',
+                    verseText: '"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."',
+                    reflection: 'This verse has been on my heart today. No matter what we\'re going through, God has a plan for our lives.',
+                    likes: 12,
+                    comments: 5,
+                    timestamp: '2 hours ago',
+                    liked: false
+                },
+                {
+                    id: 2,
+                    userId: 2,
+                    username: 'Sarah Johnson',
+                    verse: 'Joshua 1:9',
+                    verseText: '"Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."',
+                    reflection: 'Feeling anxious about an upcoming decision. This verse reminded me that I\'m not alone in this.',
+                    likes: 8,
+                    comments: 3,
+                    timestamp: '5 hours ago',
+                    liked: false
+                }
+            ],
+            users: [
+                { id: 1, name: 'John Doe', followers: 24, following: 18, verses: 12, isFollowing: true },
+                { id: 2, name: 'Sarah Johnson', followers: 15, following: 22, verses: 8, isFollowing: false },
+                { id: 3, name: 'Michael Jordan', followers: 32, following: 15, verses: 15, isFollowing: false },
+                { id: 4, name: 'Emma Smith', followers: 18, following: 12, verses: 6, isFollowing: false }
+            ],
+            audioPlayer: {
+                isPlaying: false,
+                currentTrack: 'Psalm 23 - The Lord is My Shepherd',
+                progress: 30
+            },
+            // PHASE 3.2 AI DATA
+            aiInsights: {
+                readingConsistency: 78,
+                weeklyVerses: 15,
+                engagementRate: 92,
+                currentStreak: 7,
+                favoriteBook: 'Psalms',
+                activeTime: '7-9 AM',
+                recommendedTopics: ['hope', 'perseverance', 'faith'],
+                communityInsights: {
+                    activeHours: '7-9 PM',
+                    trendingTopics: ['Prayer', 'Hope', 'Guidance']
+                }
+            }
+        };
+
+        // DOM Elements
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            loginBtn: document.getElementById('loginBtn'),
+            registerBtn: document.getElementById('registerBtn'),
+            loginModal: document.getElementById('loginModal'),
+            registerModal: document.getElementById('registerModal'),
+            createPostModal: document.getElementById('createPostModal'),
+            shareModal: document.getElementById('shareModal'),
+            closeBtns: document.querySelectorAll('.close-btn'),
+            loginForm: document.getElementById('loginForm'),
+            registerForm: document.getElementById('registerForm'),
+            createPostForm: document.getElementById('createPostForm'),
+            createPostBtn: document.getElementById('createPostBtn'),
+            likeBtns: document.querySelectorAll('.like-btn'),
+            commentBtns: document.querySelectorAll('.comment-btn'),
+            shareBtns: document.querySelectorAll('.share-btn'),
+            copyBtns: document.querySelectorAll('.copy-btn'),
+            followBtns: document.querySelectorAll('.follow-btn'),
+            joinChallengeBtns: document.querySelectorAll('.join-challenge-btn'),
+            shareOptions: document.querySelectorAll('.share-option'),
+            navLinks: document.querySelectorAll('.nav-links a'),
+            playBtn: document.getElementById('playBtn'),
+            prevBtn: document.getElementById('prevBtn'),
+            nextBtn: document.getElementById('nextBtn'),
+            notification: document.getElementById('notification'),
+            notificationMessage: document.getElementById('notificationMessage'),
+            followerCount: document.getElementById('followerCount'),
+            followingCount: document.getElementById('followingCount'),
+            verseCount: document.getElementById('verseCount'),
+            generateInsights: document.getElementById('generateInsights'),
+            exportData: document.getElementById('exportData')
+        };
+
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            elements.notificationMessage.textContent = message;
+            elements.notification.className = `notification ${type}`;
+            elements.notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                elements.notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function toggleModal(modal) {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'flex';
+            }
+        }
+
+        // Navigation Management
+        function switchView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            // Show selected view
+            const targetView = document.getElementById(`${viewName}-view`);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-view') === viewName) {
+                    link.classList.add('active');
+                }
+            });
+            
+            appState.currentView = viewName;
+            showNotification(`Switched to ${viewName} view`, 'info');
+        }
+
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('verseCuratorTheme') || 'light';
+            setTheme(savedTheme);
+        }
+
+        function setTheme(theme) {
+            appState.currentTheme = theme;
+            document.body.className = theme === 'dark' ? 'dark-theme' : '';
+            localStorage.setItem('verseCuratorTheme', theme);
+            elements.themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const newTheme = appState.currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+
+        // Authentication Management
+        function initAuth() {
+            const savedUser = localStorage.getItem('verseCuratorUser');
+            if (savedUser) {
+                appState.currentUser = JSON.parse(savedUser);
+                appState.isLoggedIn = true;
+                updateAuthUI();
+            }
+        }
+
+        function updateAuthUI() {
+            if (appState.isLoggedIn) {
+                elements.loginBtn.textContent = 'Logout';
+                elements.registerBtn.style.display = 'none';
+                elements.createPostBtn.disabled = false;
+            } else {
+                elements.loginBtn.textContent = 'Login';
+                elements.registerBtn.style.display = 'block';
+                elements.createPostBtn.disabled = true;
+            }
+        }
+
+        function login(email, password) {
+            if (email && password) {
+                appState.currentUser = {
+                    id: 1,
+                    name: 'John Doe',
+                    email: email
+                };
+                appState.isLoggedIn = true;
+                localStorage.setItem('verseCuratorUser', JSON.stringify(appState.currentUser));
+                updateAuthUI();
+                toggleModal(elements.loginModal);
+                showNotification('Login successful!', 'success');
+                return true;
+            }
+            return false;
+        }
+
+        function logout() {
+            appState.currentUser = null;
+            appState.isLoggedIn = false;
+            localStorage.removeItem('verseCuratorUser');
+            updateAuthUI();
+            showNotification('Logged out successfully', 'info');
+        }
+
+        function register(name, email, password) {
+            if (name && email && password) {
+                appState.currentUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email
+                };
+                appState.isLoggedIn = true;
+                localStorage.setItem('verseCuratorUser', JSON.stringify(appState.currentUser));
+                updateAuthUI();
+                toggleModal(elements.registerModal);
+                showNotification('Registration successful!', 'success');
+                return true;
+            }
+            return false;
+        }
+
+        // Post Management
+        function createPost(verse, verseText, reflection) {
+            if (!appState.isLoggedIn) {
+                showNotification('Please login to create a post', 'error');
+                return;
+            }
+
+            const newPost = {
+                id: Date.now(),
+                userId: appState.currentUser.id,
+                username: appState.currentUser.name,
+                verse: verse,
+                verseText: verseText,
+                reflection: reflection,
+                likes: 0,
+                comments: 0,
+                timestamp: 'Just now',
+                liked: false
+            };
+
+            appState.posts.unshift(newPost);
+            renderPosts();
+            toggleModal(elements.createPostModal);
+            showNotification('Post published successfully!', 'success');
+        }
+
+        function renderPosts() {
+            const feed = document.querySelector('.feed');
+            if (!feed) return;
+            
+            feed.innerHTML = '';
+
+            appState.posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-card';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="user-avatar">${post.username.substring(0, 2)}</div>
+                        <div class="user-info">
+                            <div class="username">${post.username}</div>
+                            <div class="post-time">${post.timestamp}</div>
+                        </div>
+                        <button class="btn btn-outline follow-btn" data-user="${post.userId}">
+                            ${appState.users.find(u => u.id === post.userId)?.isFollowing ? 'Following' : 'Follow'}
+                        </button>
+                    </div>
+                    <div class="post-content">
+                        <div class="verse-text">${post.verseText} - ${post.verse}</div>
+                        <p>${post.reflection}</p>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn like-btn ${post.liked ? 'active' : ''}" data-post="${post.id}">
+                            <span>❤️</span> <span class="like-count">${post.likes}</span>
+                        </button>
+                        <button class="action-btn comment-btn" data-post="${post.id}">
+                            <span>💬</span> <span class="comment-count">${post.comments}</span>
+                        </button>
+                        <button class="action-btn share-btn" data-post="${post.id}">
+                            <span>🔄</span> <span>Share</span>
+                        </button>
+                        <button class="action-btn copy-btn" data-verse="${post.verse}">
+                            <span>📋</span> <span>Copy</span>
+                        </button>
+                    </div>
+                `;
+                feed.appendChild(postElement);
+            });
+
+            attachPostEventListeners();
+        }
+
+        function likePost(postId) {
+            const post = appState.posts.find(p => p.id === postId);
+            if (post) {
+                if (post.liked) {
+                    post.likes--;
+                    post.liked = false;
+                } else {
+                    post.likes++;
+                    post.liked = true;
+                }
+                renderPosts();
+            }
+        }
+
+        function followUser(userId) {
+            const user = appState.users.find(u => u.id === userId);
+            if (user) {
+                user.isFollowing = !user.isFollowing;
+                if (user.isFollowing) {
+                    user.followers++;
+                    showNotification(`You are now following ${user.name}`, 'success');
+                } else {
+                    user.followers--;
+                    showNotification(`You unfollowed ${user.name}`, 'info');
+                }
+                renderPosts();
+                updateUserStats();
+            }
+        }
+
+        function updateUserStats() {
+            const currentUser = appState.users.find(u => u.id === 1);
+            if (currentUser) {
+                elements.followerCount.textContent = currentUser.followers;
+                elements.followingCount.textContent = currentUser.following;
+                elements.verseCount.textContent = currentUser.verses;
+            }
+        }
+
+        function copyVerse(verse) {
+            navigator.clipboard.writeText(verse).then(() => {
+                showNotification('Verse copied to clipboard!', 'success');
+            }).catch(err => {
+                showNotification('Failed to copy verse', 'error');
+            });
+        }
+
+        function shareVerse(platform, verse) {
+            let url = '';
+            const text = `Check out this Bible verse: ${verse}`;
+            
+            switch(platform) {
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+                    break;
+                case 'whatsapp':
+                    url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(window.location.href);
+                    showNotification('Link copied to clipboard!', 'success');
+                    return;
+            }
+            
+            window.open(url, '_blank');
+            toggleModal(elements.shareModal);
+        }
+
+        // Audio Player Management
+        function toggleAudioPlayback() {
+            appState.audioPlayer.isPlaying = !appState.audioPlayer.isPlaying;
+            elements.playBtn.textContent = appState.audioPlayer.isPlaying ? '⏸️' : '▶️';
+            showNotification(appState.audioPlayer.isPlaying ? 'Audio playing' : 'Audio paused', 'info');
+        }
+
+        function playNextTrack() {
+            showNotification('Playing next track', 'info');
+        }
+
+        function playPrevTrack() {
+            showNotification('Playing previous track', 'info');
+        }
+
+        // PHASE 3.2 AI FUNCTIONS
+        function generateAIInsights() {
+            showNotification('🤖 Generating advanced insights...', 'info');
+            // Simulate AI processing
+            setTimeout(() => {
+                showNotification('Advanced insights generated! Check your analytics.', 'success');
+            }, 2000);
+        }
+
+        function exportUserData() {
+            showNotification('Preparing data export...', 'info');
+            // Simulate export process
+            setTimeout(() => {
+                showNotification('Data exported successfully!', 'success');
+            }, 1500);
+        }
+
+        // Event Listeners Attachment
+        function attachEventListeners() {
+            // Theme toggle
+            elements.themeToggle.addEventListener('click', toggleTheme);
+            
+            // Auth buttons
+            elements.loginBtn.addEventListener('click', () => {
+                if (appState.isLoggedIn) {
+                    logout();
+                } else {
+                    toggleModal(elements.loginModal);
+                }
+            });
+            
+            elements.registerBtn.addEventListener('click', () => {
+                toggleModal(elements.registerModal);
+            });
+            
+            // Modal close buttons
+            elements.closeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    toggleModal(e.target.closest('.modal'));
+                });
+            });
+            
+            // Form submissions
+            elements.loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                login(email, password);
+            });
+            
+            elements.registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                register(name, email, password);
+            });
+            
+            elements.createPostForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const verse = document.getElementById('postVerse').value;
+                const verseText = document.getElementById('postText').value;
+                const reflection = document.getElementById('postReflection').value;
+                createPost(verse, verseText, reflection);
+            });
+            
+            // Create post button
+            elements.createPostBtn.addEventListener('click', () => {
+                if (appState.isLoggedIn) {
+                    toggleModal(elements.createPostModal);
+                } else {
+                    showNotification('Please login to create a post', 'error');
+                }
+            });
+            
+            // Navigation
+            elements.navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const view = e.target.getAttribute('data-view');
+                    switchView(view);
+                });
+            });
+            
+            // Audio player controls
+            elements.playBtn.addEventListener('click', toggleAudioPlayback);
+            elements.nextBtn.addEventListener('click', playNextTrack);
+            elements.prevBtn.addEventListener('click', playPrevTrack);
+            
+            // Share options
+            elements.shareOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const platform = e.target.getAttribute('data-platform');
+                    const verse = e.target.closest('.modal').getAttribute('data-verse');
+                    shareVerse(platform, verse);
+                });
+            });
+            
+            // Join challenge buttons
+            elements.joinChallengeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showNotification('Challenge joined successfully!', 'success');
+                });
+            });
+
+            // PHASE 3.2 AI Buttons
+            if (elements.generateInsights) {
+                elements.generateInsights.addEventListener('click', generateAIInsights);
+            }
+            if (elements.exportData) {
+                elements.exportData.addEventListener('click', exportUserData);
+            }
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    toggleModal(e.target);
+                }
+            });
+        }
+
+        function attachPostEventListeners() {
+            // Like buttons
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const postId = parseInt(e.target.closest('.like-btn').getAttribute('data-post'));
+                    likePost(postId);
+                });
+            });
+            
+            // Comment buttons
+            document.querySelectorAll('.comment-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const postId = parseInt(e.target.closest('.comment-btn').getAttribute('data-post'));
+                    showNotification(`Opening comments for post ${postId}`, 'info');
+                });
+            });
+            
+            // Share buttons
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const postId = parseInt(e.target.closest('.share-btn').getAttribute('data-post'));
+                    const post = appState.posts.find(p => p.id === postId);
+                    if (post) {
+                        elements.shareModal.setAttribute('data-verse', `${post.verseText} - ${post.verse}`);
+                        toggleModal(elements.shareModal);
+                    }
+                });
+            });
+            
+            // Copy buttons
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const verse = e.target.closest('.copy-btn').getAttribute('data-verse');
+                    copyVerse(verse);
+                });
+            });
+            
+            // Follow buttons
+            document.querySelectorAll('.follow-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const userId = parseInt(e.target.getAttribute('data-user'));
+                    followUser(userId);
+                });
+            });
+        }
+
+        // Initialize Application
+        function initApp() {
+            initTheme();
+            initAuth();
+            attachEventListeners();
+            attachPostEventListeners();
+            updateUserStats();
+            
+            console.log('VerseCurator Phase 3.2 - Navigation Fixed & AI Features Added!');
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

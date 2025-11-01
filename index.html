@@ -330,6 +330,13 @@
             border-bottom: 1px solid #eee;
         }
 
+        .challenge-card {
+            background-color: rgba(74, 111, 165, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
         /* Enhanced Audio Player */
         .audio-player {
             background-color: var(--card-color);
@@ -687,7 +694,7 @@
             }
         }
 
-        /* Existing AI styles remain... */
+        /* AI Enhanced Styles */
         .ai-recommendation-card {
             background: linear-gradient(135deg, var(--ai-color), var(--primary-color));
             color: white;
@@ -846,122 +853,180 @@
                         <div class="user-avatar">JD</div>
                         <div class="username">John Doe</div>
                         <div class="user-stats">
-                            <div>Audio Time: <span id="audioTime">4.2h</span></div>
-                            <div>Meditation: <span id="meditationTime">2.1h</span></div>
-                            <div>Focus Sessions: <span id="focusSessions">12</span></div>
+                            <div>Followers: <span id="followerCount">24</span></div>
+                            <div>Following: <span id="followingCount">18</span></div>
+                            <div>Verses: <span id="verseCount">12</span></div>
+                        </div>
+                        
+                        <div class="learning-indicator">
+                            <span>AI Learning:</span>
+                            <div class="learning-progress">
+                                <div class="learning-progress-bar" id="aiLearningProgress" style="width: 65%"></div>
+                            </div>
+                            <span>65%</span>
                         </div>
                         
                         <button class="btn btn-immersion" id="createPostBtn" style="width: 100%; margin-top: 15px;">Create Post</button>
                         <button class="btn btn-outline" id="addVoiceNoteBtn" style="width: 100%; margin-top: 10px;">🎤 Add Voice Note</button>
                     </div>
 
-                    <h3 class="section-title" style="margin-top: 20px;">Quick Immersion</h3>
-                    <div class="action-buttons" style="display: flex; flex-direction: column; gap: 10px;">
-                        <button class="btn btn-outline" id="quickMeditationBtn">🧘 5-min Meditation</button>
-                        <button class="btn btn-outline" id="audioReflectionBtn">🎧 Audio Reflection</button>
-                        <button class="btn btn-outline" id="sleepTimerBtn">💤 Sleep Verse</button>
+                    <h3 class="section-title" style="margin-top: 20px;">AI-Detected Interests</h3>
+                    <div class="topics-list">
+                        <div class="topic-tag">#Hope</div>
+                        <div class="topic-tag">#Faith</div>
+                        <div class="topic-tag">#Guidance</div>
+                        <div class="topic-tag">#Strength</div>
+                        <div class="topic-tag">#Peace</div>
                     </div>
                 </aside>
 
                 <main class="feed">
-                    <!-- Enhanced Audio Player -->
-                    <div class="audio-player">
-                        <div class="player-controls">
-                            <button class="player-btn" id="prevBtn">⏮️</button>
-                            <button class="player-btn" id="playBtn">▶️</button>
-                            <button class="player-btn" id="nextBtn">⏭️</button>
+                    <!-- AI Personalization Card -->
+                    <div class="ai-recommendation-card">
+                        <div class="ai-badge">AI Personalization</div>
+                        <h3>🤖 Personalized For You</h3>
+                        <p>Based on your 156 interactions, we've detected you engage most with verses about <strong>hope and perseverance</strong></p>
+                        <div class="ml-prediction">
+                            <strong>Prediction:</strong> You'll likely engage with Psalms 23 next (87% confidence)
                         </div>
-                        <div class="progress-container">
-                            <span class="time-display" id="currentTime">0:00</span>
-                            <div class="progress-bar" id="progressBar">
-                                <div class="progress" id="progress"></div>
-                            </div>
-                            <span class="time-display" id="duration">0:00</span>
-                        </div>
-                        <div class="audio-features">
-                            <button class="feature-btn" id="bookmarkBtn" title="Add Bookmark">🔖</button>
-                            <button class="feature-btn" id="clipBtn" title="Create Clip">✂️</button>
-                            <button class="feature-btn" id="shareAudioBtn" title="Share Audio">📤</button>
-                            <button class="feature-btn" id="backgroundPlayBtn" title="Background Play">🎵</button>
-                        </div>
+                        <button class="btn btn-outline" id="personalizedFeedBtn" style="background: white; color: var(--primary-color); margin-top: 10px;">
+                            Show Personalized Feed
+                        </button>
                     </div>
 
-                    <!-- Voice Note Example -->
                     <div class="post-card">
                         <div class="post-header">
                             <div class="user-avatar">JD</div>
                             <div class="user-info">
                                 <div class="username">John Doe</div>
-                                <div class="post-time">1 hour ago • 🎤 Voice Note</div>
+                                <div class="post-time">2 hours ago</div>
                             </div>
+                            <button class="btn btn-outline follow-btn" data-user="1">Following</button>
                         </div>
                         <div class="post-content">
                             <div class="verse-text">
-                                "The Lord is my shepherd; I shall not want." - Psalm 23:1
+                                "For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future." - Jeremiah 29:11
                             </div>
+                            <p>This verse has been on my heart today. No matter what we're going through, God has a plan for our lives.</p>
                             
-                            <div class="voice-note-container">
-                                <div style="display: flex; justify-content: between; align-items: center;">
-                                    <strong>Personal Reflection</strong>
-                                    <span style="font-size: 0.8rem;">1:24</span>
-                                </div>
-                                <div class="voice-note-player">
-                                    <button class="player-btn" id="playVoiceNote">▶️</button>
-                                    <div class="voice-waveform" id="voiceWaveform">
-                                        <!-- Wave bars will be generated by JavaScript -->
-                                    </div>
-                                    <button class="feature-btn" id="shareVoiceNote">📤</button>
-                                </div>
+                            <div class="nlp-analysis">
+                                <strong>AI Analysis:</strong> 
+                                <span class="sentiment-indicator sentiment-positive">Positive Sentiment</span>
+                                <span class="topic-tag">Hope</span>
+                                <span class="topic-tag">Future</span>
+                                <span class="topic-tag">Divine Plan</span>
                             </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn" data-post="1">
+                                <span>❤️</span> <span class="like-count">12</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-post="1">
+                                <span>💬</span> <span class="comment-count">5</span>
+                            </button>
+                            <button class="action-btn share-btn" data-post="1">
+                                <span>🔄</span> <span>Share</span>
+                            </button>
+                            <button class="action-btn copy-btn" data-verse="Jeremiah 29:11">
+                                <span>📋</span> <span>Copy</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Video Devotional Example -->
                     <div class="post-card">
                         <div class="post-header">
-                            <div class="user-avatar">VC</div>
+                            <div class="user-avatar">SJ</div>
                             <div class="user-info">
-                                <div class="username">VerseCurator Team</div>
-                                <div class="post-time">3 hours ago • 📺 Video Devotional</div>
+                                <div class="username">Sarah Johnson</div>
+                                <div class="post-time">5 hours ago</div>
                             </div>
+                            <button class="btn btn-outline follow-btn" data-user="2">Follow</button>
                         </div>
                         <div class="post-content">
                             <div class="verse-text">
-                                "Be still, and know that I am God." - Psalm 46:10
+                                "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go." - Joshua 1:9
                             </div>
-                            <p>Join us in this guided meditation on finding peace in God's presence.</p>
+                            <p>Feeling anxious about an upcoming decision. This verse reminded me that I'm not alone in this.</p>
                             
-                            <div class="video-thumbnail" id="videoThumbnail">
-                                ▶️
+                            <div class="nlp-analysis">
+                                <strong>AI Analysis:</strong> 
+                                <span class="sentiment-indicator sentiment-neutral">Mixed Emotions</span>
+                                <span class="topic-tag">Courage</span>
+                                <span class="topic-tag">Anxiety</span>
+                                <span class="topic-tag">Divine Presence</span>
                             </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn" data-post="2">
+                                <span>❤️</span> <span class="like-count">8</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-post="2">
+                                <span>💬</span> <span class="comment-count">3</span>
+                            </button>
+                            <button class="action-btn share-btn" data-post="2">
+                                <span>🔄</span> <span>Share</span>
+                            </button>
+                            <button class="action-btn copy-btn" data-verse="Joshua 1:9">
+                                <span>📋</span> <span>Copy</span>
+                            </button>
                         </div>
                     </div>
                 </main>
 
                 <aside class="right-sidebar">
-                    <h3 class="section-title">Audio Bookmarks</h3>
-                    <div class="bookmarks-list">
-                        <div class="bookmark-item" style="padding: 10px; border-left: 3px solid var(--immersion-color); margin-bottom: 10px;">
-                            <div style="font-weight: bold;">Psalm 23 Reflection</div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">2:15 • Yesterday</div>
-                        </div>
-                        <div class="bookmark-item" style="padding: 10px; border-left: 3px solid var(--immersion-color); margin-bottom: 10px;">
-                            <div style="font-weight: bold;">Morning Prayer</div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">5:42 • Today</div>
-                        </div>
+                    <h3 class="section-title">AI-Powered Challenges</h3>
+                    <div class="challenge-card">
+                        <h4>📊 Personalized Reading Plan</h4>
+                        <p>AI-curated plan based on your reading history and engagement patterns</p>
+                        <button class="btn btn-ai join-challenge-btn" style="width: 100%; margin-top: 10px;">Start AI Plan</button>
+                    </div>
+                    <div class="challenge-card">
+                        <h4>🤖 Smart Verse Memorization</h4>
+                        <p>Adaptive learning system that adjusts to your memory retention</p>
+                        <button class="btn btn-ai join-challenge-btn" style="width: 100%; margin-top: 10px;">Start Learning</button>
                     </div>
 
-                    <h3 class="section-title" style="margin-top: 20px;">Recent Audio Clips</h3>
-                    <div class="audio-clips">
-                        <div class="clip-item" style="padding: 10px; background: rgba(0, 184, 148, 0.1); border-radius: var(--border-radius); margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: between; align-items: center;">
-                                <span style="font-weight: bold;">John 3:16 Clip</span>
-                                <button class="feature-btn" style="font-size: 0.8rem;" id="shareClipBtn">📤</button>
+                    <h3 class="section-title" style="margin-top: 20px;">AI-Suggested Friends</h3>
+                    <div class="suggested-users">
+                        <div class="suggested-user">
+                            <div class="user-avatar">MJ</div>
+                            <div class="user-info">
+                                <div class="username">Michael Jordan</div>
+                                <div class="mutual-friends">92% interest match</div>
                             </div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">0:45 • Shared 3 times</div>
+                            <button class="btn btn-outline follow-btn" data-user="3">Follow</button>
+                        </div>
+                        <div class="suggested-user">
+                            <div class="user-avatar">ES</div>
+                            <div class="user-info">
+                                <div class="username">Emma Smith</div>
+                                <div class="mutual-friends">87% interest match</div>
+                            </div>
+                            <button class="btn btn-outline follow-btn" data-user="4">Follow</button>
                         </div>
                     </div>
                 </aside>
+            </div>
+
+            <div class="audio-player">
+                <div class="player-controls">
+                    <button class="player-btn" id="prevBtn">⏮️</button>
+                    <button class="player-btn" id="playBtn">▶️</button>
+                    <button class="player-btn" id="nextBtn">⏭️</button>
+                </div>
+                <div class="progress-container">
+                    <span class="time-display" id="currentTime">0:00</span>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <span class="time-display" id="duration">0:00</span>
+                </div>
+                <div class="audio-features">
+                    <button class="feature-btn" id="bookmarkBtn" title="Add Bookmark">🔖</button>
+                    <button class="feature-btn" id="clipBtn" title="Create Clip">✂️</button>
+                    <button class="feature-btn" id="shareAudioBtn" title="Share Audio">📤</button>
+                    <button class="feature-btn" id="backgroundPlayBtn" title="Background Play">🎵</button>
+                </div>
             </div>
         </section>
 
@@ -1077,57 +1142,45 @@
             </div>
         </div>
 
-        <!-- Existing other views (Discover, Community, Intelligence, Profile) remain similar but enhanced -->
-        <!-- ... -->
+        <!-- DISCOVER VIEW -->
+        <section id="discover-view" class="view-section">
+            <div class="verse-section">
+                <h2>Discover New Content</h2>
+                <p>AI-powered content discovery and recommendations</p>
+                <!-- Content would go here -->
+            </div>
+        </section>
+
+        <!-- COMMUNITY VIEW -->
+        <section id="community-view" class="view-section">
+            <div class="verse-section">
+                <h2>Community</h2>
+                <p>Connect with other believers</p>
+                <!-- Content would go here -->
+            </div>
+        </section>
+
+        <!-- INTELLIGENCE VIEW -->
+        <section id="intelligence-view" class="view-section">
+            <div class="verse-section">
+                <h2>AI Intelligence</h2>
+                <p>Advanced analytics and insights</p>
+                <!-- Content would go here -->
+            </div>
+        </section>
+
+        <!-- PROFILE VIEW -->
+        <section id="profile-view" class="view-section">
+            <div class="verse-section">
+                <h2>Profile</h2>
+                <p>Your personal dashboard</p>
+                <!-- Content would go here -->
+            </div>
+        </section>
 
     </div>
 
     <!-- MODALS -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Video Devotional</h3>
-                <button class="close-btn" id="closeVideoModal">&times;</button>
-            </div>
-            <div class="video-thumbnail" style="height: 300px; font-size: 72px;">
-                ▶️
-            </div>
-            <div style="margin-top: 15px;">
-                <h4>Be Still - Guided Meditation</h4>
-                <p>A peaceful reflection on Psalm 46:10 with calming visuals and soft music.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="uploadMediaModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Upload Media</h3>
-                <button class="close-btn" id="closeUploadModal">&times;</button>
-            </div>
-            <form id="uploadMediaForm">
-                <div class="form-group">
-                    <label for="mediaType">Media Type</label>
-                    <select id="mediaType" class="form-control">
-                        <option value="audio">Audio Recording</option>
-                        <option value="video">Video Devotional</option>
-                        <option value="background">Background Image</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="mediaFile">Select File</label>
-                    <input type="file" id="mediaFile" class="form-control" accept="audio/*,video/*,image/*">
-                </div>
-                <div class="form-group">
-                    <label for="mediaDescription">Description</label>
-                    <textarea id="mediaDescription" class="form-control"></textarea>
-                </div>
-                <button type="submit" class="btn btn-immersion" style="width: 100%;">Upload Media</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Existing modals (login, register, create post, share) remain... -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1176,7 +1229,43 @@
         </div>
     </div>
 
-    <!-- Notification -->
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Post</h3>
+                <button class="close-btn" id="closeCreatePostModal">&times;</button>
+            </div>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label for="postVerse">Bible Verse</label>
+                    <input type="text" id="postVerse" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Your Reflection</label>
+                    <textarea id="postContent" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-immersion" style="width: 100%;">Create Post</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Video Devotional</h3>
+                <button class="close-btn" id="closeVideoModal">&times;</button>
+            </div>
+            <div class="video-thumbnail" style="height: 300px; font-size: 72px;">
+                ▶️
+            </div>
+            <div style="margin-top: 15px;">
+                <h4>Be Still - Guided Meditation</h4>
+                <p>A peaceful reflection on Psalm 46:10 with calming visuals and soft music.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION -->
     <div class="notification" id="notification">
         <span id="notificationMessage"></span>
     </div>
@@ -1193,13 +1282,13 @@
                 focusMode: false,
                 meditation: {
                     active: false,
-                    timeRemaining: 600, // 10 minutes in seconds
+                    timeRemaining: 600,
                     totalTime: 600,
                     timer: null
                 },
                 sleepTimer: {
                     active: false,
-                    duration: 900, // 15 minutes
+                    duration: 900,
                     selectedVerse: 'Psalm 23',
                     timer: null
                 },
@@ -1207,20 +1296,52 @@
                     currentTrack: 'Psalm 23 - Peaceful Recitation',
                     isPlaying: false,
                     progress: 30,
-                    duration: 180, // 3 minutes
+                    duration: 180,
                     bookmarks: [],
                     clips: []
                 }
-            }
+            },
+            posts: [
+                {
+                    id: 1,
+                    userId: 1,
+                    username: 'John Doe',
+                    verse: 'Jeremiah 29:11',
+                    verseText: '"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."',
+                    reflection: 'This verse has been on my heart today. No matter what we\'re going through, God has a plan for our lives.',
+                    likes: 12,
+                    comments: 5,
+                    timestamp: '2 hours ago',
+                    liked: false
+                },
+                {
+                    id: 2,
+                    userId: 2,
+                    username: 'Sarah Johnson',
+                    verse: 'Joshua 1:9',
+                    verseText: '"Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."',
+                    reflection: 'Feeling anxious about an upcoming decision. This verse reminded me that I\'m not alone in this.',
+                    likes: 8,
+                    comments: 3,
+                    timestamp: '5 hours ago',
+                    liked: false
+                }
+            ],
+            users: [
+                { id: 1, name: 'John Doe', followers: 24, following: 18, verses: 12, isFollowing: true },
+                { id: 2, name: 'Sarah Johnson', followers: 15, following: 22, verses: 8, isFollowing: false },
+                { id: 3, name: 'Michael Jordan', followers: 32, following: 15, verses: 15, isFollowing: false },
+                { id: 4, name: 'Emma Smith', followers: 18, following: 12, verses: 6, isFollowing: false }
+            ]
         };
 
         // Utility Functions
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
-            const notificationMessage = document.getElementById('notificationMessage');
+            const messageEl = document.getElementById('notificationMessage');
             
-            if (notification && notificationMessage) {
-                notificationMessage.textContent = message;
+            if (notification && messageEl) {
+                messageEl.textContent = message;
                 notification.className = `notification ${type}`;
                 notification.style.display = 'flex';
                 
@@ -1233,11 +1354,7 @@
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
-                if (modal.style.display === 'flex') {
-                    modal.style.display = 'none';
-                } else {
-                    modal.style.display = 'flex';
-                }
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
             }
         }
 
@@ -1355,6 +1472,47 @@
             return false;
         }
 
+        // Post Management
+        function createPost(verse, content) {
+            if (!appState.isLoggedIn) {
+                showNotification('Please login to create a post', 'error');
+                return;
+            }
+
+            const newPost = {
+                id: Date.now(),
+                userId: appState.currentUser.id,
+                username: appState.currentUser.name,
+                verse: verse,
+                reflection: content,
+                likes: 0,
+                comments: 0,
+                timestamp: 'Just now',
+                liked: false
+            };
+
+            appState.posts.unshift(newPost);
+            toggleModal('createPostModal');
+            showNotification('Post created successfully!', 'success');
+        }
+
+        function likePost(postId) {
+            const post = appState.posts.find(p => p.id === postId);
+            if (post) {
+                post.liked = !post.liked;
+                post.likes += post.liked ? 1 : -1;
+                showNotification(post.liked ? 'Post liked!' : 'Post unliked', 'info');
+            }
+        }
+
+        function followUser(userId) {
+            const user = appState.users.find(u => u.id === userId);
+            if (user) {
+                user.isFollowing = !user.isFollowing;
+                showNotification(user.isFollowing ? `Following ${user.name}` : `Unfollowed ${user.name}`, 'info');
+            }
+        }
+
         // Multimedia & Immersion Engine
         const ImmersionEngine = {
             // Audio Management
@@ -1365,42 +1523,6 @@
                     playBtn.textContent = appState.immersion.audio.isPlaying ? '⏸️' : '▶️';
                 }
                 showNotification(appState.immersion.audio.isPlaying ? 'Audio playing' : 'Audio paused', 'info');
-                
-                // Simulate audio progress
-                if (appState.immersion.audio.isPlaying) {
-                    this.startAudioProgress();
-                }
-            },
-
-            startAudioProgress() {
-                if (appState.immersion.audio.isPlaying) {
-                    setTimeout(() => {
-                        if (appState.immersion.audio.isPlaying) {
-                            appState.immersion.audio.progress += 1;
-                            if (appState.immersion.audio.progress >= 100) {
-                                appState.immersion.audio.progress = 0;
-                                appState.immersion.audio.isPlaying = false;
-                            }
-                            this.updateAudioUI();
-                            this.startAudioProgress();
-                        }
-                    }, 1000);
-                }
-            },
-
-            updateAudioUI() {
-                const progress = document.getElementById('progress');
-                const currentTime = document.getElementById('currentTime');
-                
-                if (progress) {
-                    progress.style.width = `${appState.immersion.audio.progress}%`;
-                }
-                
-                if (currentTime) {
-                    const minutes = Math.floor((appState.immersion.audio.progress / 100) * appState.immersion.audio.duration / 60);
-                    const seconds = Math.floor((appState.immersion.audio.progress / 100) * appState.immersion.audio.duration % 60);
-                    currentTime.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                }
             },
 
             // Bookmark System
@@ -1408,11 +1530,8 @@
                 const bookmark = {
                     id: Date.now(),
                     timestamp: appState.immersion.audio.progress,
-                    time: Math.floor((appState.immersion.audio.progress / 100) * appState.immersion.audio.duration),
-                    title: `Bookmark at ${Math.floor((appState.immersion.audio.progress / 100) * appState.immersion.audio.duration)}s`,
-                    date: new Date().toLocaleDateString()
+                    title: `Bookmark at ${appState.immersion.audio.progress}%`
                 };
-                
                 appState.immersion.audio.bookmarks.push(bookmark);
                 showNotification('🔖 Bookmark added!', 'success');
             },
@@ -1492,15 +1611,11 @@
 
             // Theme Management
             setImmersiveTheme(theme) {
-                // Remove all theme classes
                 document.body.classList.remove('nature-theme', 'ocean-theme', 'sunset-theme', 'night-theme');
                 document.body.classList.remove('animated-bg-nature', 'animated-bg-ocean', 'animated-bg-sunset');
                 
-                // Add selected theme
                 if (theme !== 'default') {
                     document.body.classList.add(`${theme}-theme`);
-                    
-                    // Add animated background for specific themes
                     if (['nature', 'ocean', 'sunset'].includes(theme)) {
                         document.body.classList.add(`animated-bg-${theme}`);
                     }
@@ -1508,21 +1623,6 @@
                 
                 appState.immersion.currentEnvironment = theme;
                 showNotification(`🎨 Switched to ${theme} theme`, 'info');
-            },
-
-            // Voice Note Waveform Generation
-            generateVoiceWaveform() {
-                const waveform = document.getElementById('voiceWaveform');
-                if (waveform) {
-                    waveform.innerHTML = '';
-                    for (let i = 0; i < 50; i++) {
-                        const bar = document.createElement('div');
-                        bar.className = 'wave-bar';
-                        bar.style.left = `${i * 6}px`;
-                        bar.style.height = `${Math.random() * 25 + 5}px`;
-                        waveform.appendChild(bar);
-                    }
-                }
             },
 
             // Sleep Timer
@@ -1535,19 +1635,27 @@
                 appState.immersion.sleepTimer.timer = setTimeout(() => {
                     if (appState.immersion.sleepTimer.active) {
                         showNotification('🌙 Time for sleep. Playing peaceful verses...', 'info');
-                        // Here you would start playing the selected verse
                     }
                 }, duration * 1000);
             }
         };
 
-        // Event Listeners Setup
+        // Event Listeners
         function attachEventListeners() {
             // Theme toggle
             document.getElementById('themeToggle').addEventListener('click', toggleTheme);
             
+            // Navigation
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const view = this.getAttribute('data-view');
+                    switchView(view);
+                });
+            });
+
             // Auth buttons
-            document.getElementById('loginBtn').addEventListener('click', () => {
+            document.getElementById('loginBtn').addEventListener('click', function() {
                 if (appState.isLoggedIn) {
                     logout();
                 } else {
@@ -1555,29 +1663,29 @@
                 }
             });
             
-            document.getElementById('registerBtn').addEventListener('click', () => {
+            document.getElementById('registerBtn').addEventListener('click', function() {
                 toggleModal('registerModal');
             });
-            
+
             // Modal close buttons
             document.querySelectorAll('.close-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const modal = e.target.closest('.modal');
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
                     if (modal) {
                         toggleModal(modal.id);
                     }
                 });
             });
-            
+
             // Form submissions
-            document.getElementById('loginForm').addEventListener('submit', (e) => {
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
                 login(email, password);
             });
             
-            document.getElementById('registerForm').addEventListener('submit', (e) => {
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const name = document.getElementById('registerName').value;
                 const email = document.getElementById('registerEmail').value;
@@ -1585,126 +1693,124 @@
                 register(name, email, password);
             });
             
-            // Navigation
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const view = e.target.getAttribute('data-view');
-                    switchView(view);
-                });
+            document.getElementById('createPostForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const verse = document.getElementById('postVerse').value;
+                const content = document.getElementById('postContent').value;
+                createPost(verse, content);
             });
-            
+
             // Audio Controls
-            document.getElementById('playBtn').addEventListener('click', () => {
+            document.getElementById('playBtn').addEventListener('click', function() {
                 ImmersionEngine.toggleAudioPlayback();
             });
             
-            document.getElementById('bookmarkBtn').addEventListener('click', () => {
+            document.getElementById('bookmarkBtn').addEventListener('click', function() {
                 ImmersionEngine.addAudioBookmark();
             });
 
             // Focus Mode
-            document.getElementById('focusModeBtn').addEventListener('click', () => {
+            document.getElementById('focusModeBtn').addEventListener('click', function() {
                 ImmersionEngine.toggleFocusMode();
             });
-
-            document.getElementById('exitFocusBtn').addEventListener('click', () => {
+            
+            document.getElementById('exitFocusBtn').addEventListener('click', function() {
                 ImmersionEngine.toggleFocusMode();
             });
 
             // Meditation
-            document.getElementById('startMeditation').addEventListener('click', () => {
+            document.getElementById('startMeditation').addEventListener('click', function() {
                 ImmersionEngine.startMeditation();
             });
-
-            document.getElementById('pauseMeditation').addEventListener('click', () => {
+            
+            document.getElementById('pauseMeditation').addEventListener('click', function() {
                 ImmersionEngine.pauseMeditation();
             });
-
-            document.getElementById('resetMeditation').addEventListener('click', () => {
+            
+            document.getElementById('resetMeditation').addEventListener('click', function() {
                 ImmersionEngine.resetMeditation();
             });
 
             // Sleep Timer
-            document.getElementById('sleep15').addEventListener('click', () => {
-                ImmersionEngine.startSleepTimer(900); // 15 minutes
+            document.getElementById('sleep15').addEventListener('click', function() {
+                ImmersionEngine.startSleepTimer(900);
             });
-
-            document.getElementById('sleep30').addEventListener('click', () => {
-                ImmersionEngine.startSleepTimer(1800); // 30 minutes
+            
+            document.getElementById('sleep30').addEventListener('click', function() {
+                ImmersionEngine.startSleepTimer(1800);
             });
-
-            document.getElementById('sleep60').addEventListener('click', () => {
-                ImmersionEngine.startSleepTimer(3600); // 60 minutes
+            
+            document.getElementById('sleep60').addEventListener('click', function() {
+                ImmersionEngine.startSleepTimer(3600);
             });
 
             // Theme Selection
             document.querySelectorAll('.theme-option').forEach(option => {
-                option.addEventListener('click', (e) => {
-                    const theme = e.target.getAttribute('data-theme');
+                option.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
                     ImmersionEngine.setImmersiveTheme(theme);
                     
-                    // Update active state
                     document.querySelectorAll('.theme-option').forEach(opt => {
                         opt.classList.remove('active');
                     });
-                    e.target.classList.add('active');
+                    this.classList.add('active');
                 });
             });
 
-            // Quick Actions
-            document.getElementById('quickMeditationBtn').addEventListener('click', () => {
-                appState.immersion.meditation.timeRemaining = 300; // 5 minutes
-                appState.immersion.meditation.totalTime = 300;
-                ImmersionEngine.startMeditation();
+            // Post interactions
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.like-btn')) {
+                    const postId = parseInt(e.target.closest('.like-btn').getAttribute('data-post'));
+                    likePost(postId);
+                }
+                
+                if (e.target.closest('.follow-btn')) {
+                    const userId = parseInt(e.target.closest('.follow-btn').getAttribute('data-user'));
+                    followUser(userId);
+                }
+                
+                if (e.target.closest('.share-btn')) {
+                    showNotification('Share functionality would open here', 'info');
+                }
             });
 
-            document.getElementById('sleepTimerBtn').addEventListener('click', () => {
-                ImmersionEngine.startSleepTimer(900); // 15 minutes
+            // Video modals
+            document.getElementById('video1').addEventListener('click', function() {
+                toggleModal('videoModal');
             });
-
-            // Video and Media
-            document.getElementById('videoThumbnail').addEventListener('click', () => {
+            
+            document.getElementById('video2').addEventListener('click', function() {
+                toggleModal('videoModal');
+            });
+            
+            document.getElementById('video3').addEventListener('click', function() {
                 toggleModal('videoModal');
             });
 
-            document.querySelectorAll('.media-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    toggleModal('videoModal');
-                });
-            });
-
-            document.getElementById('uploadMediaBtn').addEventListener('click', () => {
-                toggleModal('uploadMediaModal');
-            });
-
-            // Voice Notes
-            document.getElementById('playVoiceNote').addEventListener('click', () => {
-                showNotification('Playing voice note...', 'info');
+            // Create post button
+            document.getElementById('createPostBtn').addEventListener('click', function() {
+                if (appState.isLoggedIn) {
+                    toggleModal('createPostModal');
+                } else {
+                    showNotification('Please login to create a post', 'error');
+                }
             });
 
             // Close modals when clicking outside
-            window.addEventListener('click', (e) => {
+            window.addEventListener('click', function(e) {
                 if (e.target.classList.contains('modal')) {
                     toggleModal(e.target.id);
                 }
             });
         }
 
-        // Initialize Phase 3.3 Features
-        function initImmersiveFeatures() {
-            // Generate voice waveform
-            ImmersionEngine.generateVoiceWaveform();
-            
-            // Initialize audio UI
-            ImmersionEngine.updateAudioUI();
-            
-            // Set up meditation timer display
-            ImmersionEngine.updateMeditationDisplay();
-            
-            showNotification('🎵 Multimedia & Immersive Features Activated!', 'success');
-            
-            console.log('Phase 3.3 Features:');
+        // Initialize App
+        function initApp() {
+            initTheme();
+            initAuth();
+            attachEventListeners();
+            showNotification('VerseCurator Phase 3.3 - Multimedia & Immersive Experience Loaded!', 'success');
+            console.log('Phase 3.3 Features Active:');
             console.log('✅ Enhanced Audio Experience');
             console.log('✅ Background Audio Playback');
             console.log('✅ Audio Bookmarks & Clips');
@@ -1715,19 +1821,6 @@
             console.log('✅ Themed Environments');
             console.log('✅ Guided Meditation');
             console.log('✅ Sleep Timer');
-        }
-
-        // Enhanced Application Initialization
-        function initApp() {
-            // Initialize existing features
-            initTheme();
-            initAuth();
-            attachEventListeners();
-            
-            // Initialize Phase 3.3 features
-            initImmersiveFeatures();
-            
-            console.log('VerseCurator Phase 3.3 - Multimedia & Immersive Experience Active!');
         }
 
         // Start the application
